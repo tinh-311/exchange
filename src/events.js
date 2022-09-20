@@ -7,7 +7,7 @@ function createRouter(db) {
   // the routes are defined here
 
   router.get('/exchange', function (req, res, next) {
-    console.log('get event');
+    console.log('get exchange');
     db.query(
       'SELECT * FROM exchange',
       [owner, 10*(req.params.page || 0)],
