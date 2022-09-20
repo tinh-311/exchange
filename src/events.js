@@ -26,7 +26,7 @@ function createRouter(db) {
     console.log('post exchange');
     db.query(
       'INSERT INTO exchange (from, to, result, timestamp) VALUES (?,?,?,?)',
-      [req.body.from, req.body.to, req.body.result, req.body.timestamp],
+      [req.body.from, req.body.to, req.body.result, new Date(req.body.timestamp * 1000)],
       (error) => {
         if (error) {
           console.error(error);
