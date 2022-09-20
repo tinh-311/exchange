@@ -26,7 +26,7 @@ function createRouter(db) {
     console.log('post exchange');
     db.query(
       'UPDATE exchange SET to=?, result=?, dateTime=? WHERE from=?',
-      [req.body.to, req.body.result, req.body.dateTime, req.params.from],
+      [req.body.to, req.body.result, req.body.dateTime, req.body.from],
       (error) => {
         if (error) {
           console.error(error);
