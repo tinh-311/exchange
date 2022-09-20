@@ -39,6 +39,8 @@ function createRouter(db) {
   });
 
   router.put('/exchange/:id', function (req, res, next) {
+    console.log('🚀 ~ req.body', req.body);
+    console.log('🚀 ~ req.params.from', req.params.from);
     db.query(
       'UPDATE exchange SET exchange.to=?, exchange.result=?, exchange.dateTime=? WHERE exchange.from=?',
       [req.body.to, req.body.result, req.body.dateTime, req.params.from],
