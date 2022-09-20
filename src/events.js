@@ -30,6 +30,9 @@ function createRouter(db) {
       (error) => {
         if (error) {
           console.error(error);
+          if(error.code === 'ER_DUP_ENTRY') {
+            console.log('🚀 ~ error.code', error.code);
+          }
           res.status(500).json({status: 'error'});
         } else {
           res.status(200).json({status: 'ok'});
