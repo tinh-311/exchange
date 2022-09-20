@@ -30,4 +30,6 @@ const app = express()
 .use(bodyParser.json())
 .use(events(connection));
 
-app.listen();
+app.listen(port, () => {
+  console.log(`Express server listening on port ${port}`);
+});
