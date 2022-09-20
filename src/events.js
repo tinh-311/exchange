@@ -30,25 +30,9 @@ function createRouter(db) {
       (error) => {
         if (error) {
           console.error(error);
-          res.status(500).json({status: `${error.code}`});
+          res.status(500).json({status: 'error when create'});
         } else {
           res.status(200).json({status: 'created'});
-        }
-      }
-    );
-  });
-  
-  router.put('/exchange', (req, res, next) => {
-    console.log('put exchange');
-    db.query(
-      'INSERT INTO exchange (owner, name, description, date) VALUES (?,?,?,?)',
-      [req.body.from, req.body.to, req.body.result, req.body.timestamp],
-      (error) => {
-        if (error) {
-          console.error(error);
-          res.status(500).json({status: 'error'});
-        } else {
-          res.status(200).json({status: 'ok'});
         }
       }
     );
@@ -56,8 +40,8 @@ function createRouter(db) {
 
   router.put('/exchange/:id', function (req, res, next) {
     db.query(
-      'UPDATE exchange SET to=?, result=?, timestamp=? WHERE from=?',
-      [req.body.to, req.body.result, req.body.timestamp, req.params.from],
+      'UPDATE exchange SET to=?, result=?, dateTime=? WHERE from=?',
+      [req.body.to, req.body.result, req.body.dateTime, req.params.from],
       (error) => {
         if (error) {
           res.status(500).json({status: 'error'});
