@@ -25,11 +25,26 @@ function createRouter(db) {
   router.post('/exchange', (req, res, next) => {
     console.log('post exchange');
     db.query(
-      'UPDATE exchange SET exchange.to=?, exchange.result=?, exchange.dateTime=? WHERE exchange.from=?',
-      [req.body.to, req.body.result, req.body.dateTime, req.body.from],
+      'INSERT INTO exchange VALUES (?,?,?,?)',
+      [req.body.from, req.body.to, req.body.result, req.body.dateTime],
       (error) => {
         if (error) {
           console.error(error);
+          if(error.code === 'ER_DUP_ENTRY') {
+            console.log('🚀 ~ error.code', error.code);
+            db.query(
+              'UPDATE exchange SET exchange.to=?, exchange.result=?, exchange.dateTime=? WHERE exchange.from=?',
+              [req.body.to, req.body.result, req.body.dateTime, req.body.from],
+              (errPut) => {
+                if(errPut) {
+                  res.status(500).json({status: 'error when update'});
+                }
+                else {
+                  res.status(200).json({status: 'Updated'});
+                }
+              }
+            )
+          }
           res.status(500).json({status: 'error when create'});
         } else {
           res.status(200).json({status: 'created'});
@@ -40,8 +55,8 @@ function createRouter(db) {
 
   router.put('/exchange/:id', function (req, res, next) {
     db.query(
-      'UPDATE exchange SET to=?, result=?, dateTime=? WHERE from=?',
-      [req.body.to, req.body.result, req.body.dateTime, req.params.from],
+      'UPDATE exchange SET to=?, result=?, timestamp=? WHERE from=?',
+      [req.body.to, req.body.result, req.body.timestamp, req.params.from],
       (error) => {
         if (error) {
           res.status(500).json({status: 'error'});
