@@ -25,8 +25,8 @@ function createRouter(db) {
   router.post('/exchange', (req, res, next) => {
     console.log('post exchange');
     db.query(
-      'INSERT INTO exchange VALUES (?,?,?,?)',
-      [req.body.from, req.body.to, req.body.result, req.body.dateTime],
+      'UPDATE exchange SET to=?, result=?, dateTime=? WHERE from=?',
+      [req.body.to, req.body.result, req.body.dateTime, req.params.from],
       (error) => {
         if (error) {
           console.error(error);
