@@ -22,10 +22,27 @@ function createRouter(db) {
     );
   });
 
-  router.post('/event', (req, res, next) => {
+  router.post('/exchange', (req, res, next) => {
+    console.log('post exchange');
     db.query(
-      'INSERT INTO events (owner, name, description, date) VALUES (?,?,?,?)',
-      [owner, req.body.name, req.body.description, new Date(req.body.date)],
+      'INSERT INTO exchange (from, to, result, timestamp) VALUES (?,?,?,?)',
+      [req.body.from, req.body.to, req.body.result, req.body.timestamp],
+      (error) => {
+        if (error) {
+          console.error(error);
+          res.status(500).json({status: 'error'});
+        } else {
+          res.status(200).json({status: 'ok'});
+        }
+      }
+    );
+  });
+  
+  router.put('/exchange', (req, res, next) => {
+    console.log('put exchange');
+    db.query(
+      'INSERT INTO exchange (owner, name, description, date) VALUES (?,?,?,?)',
+      [req.body.from, req.body.to, req.body.result, req.body.timestamp],
       (error) => {
         if (error) {
           console.error(error);
@@ -37,24 +54,10 @@ function createRouter(db) {
     );
   });
 
-  router.delete('/event/:id', function (req, res, next) {
+  router.put('/exchange/:id', function (req, res, next) {
     db.query(
-      'DELETE FROM events WHERE id=? AND owner=?',
-      [req.params.id, owner],
-      (error) => {
-        if (error) {
-          res.status(500).json({status: 'error'});
-        } else {
-          res.status(200).json({status: 'ok'});
-        }
-      }
-    );
-  });
-
-  router.put('/event/:id', function (req, res, next) {
-    db.query(
-      'UPDATE events SET name=?, description=?, date=? WHERE id=? AND owner=?',
-      [req.body.name, req.body.description, new Date(req.body.date), req.params.id, owner],
+      'UPDATE exchange SET to=?, result=?, timestamp=? WHERE from=?',
+      [req.body.to, req.body.result, req.body.timestamp, req.params.from],
       (error) => {
         if (error) {
           res.status(500).json({status: 'error'});

@@ -12,14 +12,12 @@ const connection = mysql.createConnection({
   database: 'klpkxber_exchangerate'
 });
 
-// MCYJCHwfu(nk/uSZ
-
 connection.connect((err) => {
   if(err) {
     console.log(err);
   }
   else {
-    console.log('Connect DB successfully');
+    console.log('Database connect successfully');
   }
 });
 
