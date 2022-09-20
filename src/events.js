@@ -31,6 +31,7 @@ function createRouter(db) {
         if (error) {
           console.error(error);
           if(error.code === 'ER_DUP_ENTRY') {
+            console.log('🚀 ~ error.code', error.code);
             db.query('UPDATE exchange SET to=?,result=?,dateTime=? WHERE from=?', 
             [req.body.to, req.body.result, req.body.dateTime, req.body.from],
               (errPut) => {
