@@ -24,10 +24,9 @@ function createRouter(db) {
   
   router.post('/exchange', (req, res, next) => {
     console.log('post exchange');
-    console.log('🚀 ~ new Intl.DateTimeFormat().format(date)', new Intl.DateTimeFormat().format(req.body.dateTime));
     db.query(
       'INSERT INTO exchange VALUES (?,?,?,?)',
-      [req.body.from, req.body.to, req.body.result, new Date(req.body.dateTime)],
+      [req.body.from, req.body.to, req.body.result, req.body.dateTime],
       (error) => {
         if (error) {
           console.error(error);
