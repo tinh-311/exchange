@@ -30,20 +30,20 @@ function createRouter(db) {
       (error) => {
         if (error) {
           console.error(error);
-          if(error.code === 'ER_DUP_ENTRY') {
-            console.log('🚀 ~ error.code', error.code);
-            db.query('UPDATE exchange SET to=?, result=?, timestamp=? WHERE from=?', 
-            [req.body.to, req.body.result, req.body.dateTime, req.body.from],
-              (errPut) => {
-                if(errPut) {
-                  res.status(500).json({status: 'error when update'});
-                }
-                else {
-                  res.status(200).json({status: 'Updated'});
-                }
-              }
-            )
-          }
+          // if(error.code === 'ER_DUP_ENTRY') {
+          //   console.log('🚀 ~ error.code', error.code);
+          //   db.query('UPDATE exchange SET to=?, result=?, timestamp=? WHERE from=?', 
+          //   [req.body.to, req.body.result, req.body.dateTime, req.body.from],
+          //     (errPut) => {
+          //       if(errPut) {
+          //         res.status(500).json({status: 'error when update'});
+          //       }
+          //       else {
+          //         res.status(200).json({status: 'Updated'});
+          //       }
+          //     }
+          //   )
+          // }
           res.status(500).json({status: 'error when create'});
         } else {
           res.status(200).json({status: 'created'});
