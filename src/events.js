@@ -35,17 +35,17 @@ function createRouter(db) {
             [req.body.to, req.body.result, req.body.dateTime, req.body.from],
               (errPut) => {
                 if(errPut) {
-                  res.status(500).json({status: 'error'});
+                  res.status(500).json({status: 'error when update'});
                 }
                 else {
-                  res.status(200).json({status: 'ok'});
+                  res.status(200).json({status: 'Updated'});
                 }
               }
             )
           }
-          res.status(500).json({status: 'error'});
+          res.status(500).json({status: 'error when create'});
         } else {
-          res.status(200).json({status: 'ok'});
+          res.status(200).json({status: 'created'});
         }
       }
     );
