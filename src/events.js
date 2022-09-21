@@ -27,7 +27,7 @@ function createRouter(db) {
     console.log('🚀 ~ req.body', req.params);
     db.query(
       'SELECT * FROM exchange WHERE exchange.from=?',
-      [req.params],
+      [req.params.from],
       (error, results) => {
         if (error) {
           console.log(error);
