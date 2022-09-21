@@ -22,7 +22,7 @@ function createRouter(db) {
     );
   });
 
-  router.get('/exchange/:id/from', function (req, res, next) {
+  router.get('/exchange/id/from', function (req, res, next) {
     console.log('get exchange from id');
     console.log('🚀 ~ req.body', req.params);
     db.query(
