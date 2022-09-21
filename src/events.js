@@ -24,7 +24,6 @@ function createRouter(db) {
 
   router.get('/exchange/:from', function (req, res, next) {
     console.log('get exchange from id');
-    console.log('🚀 ~ req.body', req.params);
     db.query(
       'SELECT * FROM exchange WHERE exchange.from=?',
       [req.params.from],
