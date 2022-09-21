@@ -22,12 +22,12 @@ function createRouter(db) {
     );
   });
 
-  router.get('/exchange/id/from', function (req, res, next) {
+  router.get('/exchange/:from', function (req, res, next) {
     console.log('get exchange from id');
     console.log('🚀 ~ req.body', req.params);
     db.query(
       'SELECT * FROM exchange WHERE exchange.from=?',
-      ['USD'],
+      [req.params],
       (error, results) => {
         if (error) {
           console.log(error);
