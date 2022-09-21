@@ -62,7 +62,13 @@ function createRouter(db) {
         if (error) {
           res.status(500).json({status: 'error'});
         } else {
-          res.status(200).json({status: 'ok'});
+          if(req.body.from === 'AUD') {
+            res.status(200).json({AUDstatus: 'Done'});
+          }
+          else {
+            res.status(200).json({AUDstatus: 'ok'});
+          }
+          
         }
       }
     );
