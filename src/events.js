@@ -24,34 +24,38 @@ function createRouter(db) {
   
   router.post('/exchange', (req, res, next) => {
     console.log('post exchange');
+    let errorCode;
     db.query(
       'INSERT INTO exchange VALUES (?,?,?,?)',
       [req.body.from, req.body.to, req.body.result, req.body.dateTime],
       (error) => {
         if (error) {
           console.error(error);
+          errorCode = error.code;
           res.status(500).json({status: 'error'});
-          if(error.code === 'ER_DUP_ENTRY') {
-            db.query(
-              'UPDATE exchange SET exchange.to=?, exchange.result=?, exchange.dateTime=? WHERE exchange.from=?',
-              [req.body.to, req.body.result, req.body.dateTime, req.body.from],
-              (error) => {
-                if (error) {
-                  res.status(500).json({status: 'error'});
-                } else {
-                  res.status(200).json({status: 'ok'});
-                }
-              }
-            );
-          }
-          else {
-            res.status(500).json({status: 'error'});
-          }
+          
         } else {
           res.status(200).json({status: 'ok'});
         }
       }
     );
+
+    if(error.code === 'ER_DUP_ENTRY') {
+      db.query(
+        'UPDATE exchange SET exchange.to=?, exchange.result=?, exchange.dateTime=? WHERE exchange.from=?',
+        [req.body.to, req.body.result, req.body.dateTime, req.body.from],
+        (error) => {
+          if (error) {
+            res.status(500).json({status: 'error'});
+          } else {
+            res.status(200).json({status: 'ok'});
+          }
+        }
+      );
+    }
+    else {
+      res.status(500).json({status: 'error'});
+    }
   });
 
   router.put('/exchange/:id', function (req, res, next) {
