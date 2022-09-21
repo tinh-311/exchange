@@ -6,10 +6,10 @@ const events = require('./events');
 
 const connection = mysql.createConnection({
   host: '103.97.126.19',
-  user: 'klpkxber_timmoDB',
-  password: 'eZYimLBX',
+  user: 'xvugyjuh_timmo',
+  password: 'Zo1lDUQCsx',
   port: '3306',
-  database: 'klpkxber_exchangerate'
+  database: 'xvugyjuh_exchangeRate'
 });
 
 connection.connect((err) => {
