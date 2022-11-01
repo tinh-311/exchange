@@ -5,9 +5,9 @@ const mysql = require('mysql');
 const events = require('./events');
 
 const connection = mysql.createConnection({
-  host: '198.91.81.14',
-  user: 'xqpjwzfv_exchange',
-  password: 'qvb9yfvgd',
+  host: 'localhost',
+  user: 'xqpjwzfv_timmo',
+  password: 'HnhSW9F7x',
   port: '3306',
   database: 'xqpjwzfv_exchange'
 });
