@@ -5,11 +5,11 @@ const mysql = require('mysql');
 const events = require('./events');
 
 const connection = mysql.createConnection({
-  host: '198.91.81.14',
-  user: 'xqpjwzfv_timmo',
-  password: 'HnhSW9F7x',
+  host: '103.97.126.19',
+  user: 'chplphmq_exchange',
+  password: 'XuxLWIN6D',
   port: '3306',
-  database: 'xqpjwzfv_exchange'
+  database: 'chplphmq_exchange'
 });
 
 connection.connect((err) => {
